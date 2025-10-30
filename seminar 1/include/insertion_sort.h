@@ -1,8 +1,6 @@
-#ifndef INSERTION_SORT_H
-#define INSERTION_SORT_H
+#pragma once
 
-template <typename T>
-void insertionSort(T arr[], int n);
+#include <vector>
 
-
-#endif // INSERTION_SORT_H
+template<typename T>
+void insertionSort(std::vector<T>& arr);

@@ -1,8 +1,7 @@
-#ifndef SELECTION_SORT_H
-#define SELECTION_SORT_H
+#pragma once
 
-template <typename T>
-void selectionSort(T arr[], int n);
+#include <vector>
+#include <utility>
 
-
-#endif // SELECTION_SORT_H
+template<typename T>
+void selectionSort(std::vector<T>& arr);

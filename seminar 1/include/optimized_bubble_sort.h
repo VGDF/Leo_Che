@@ -1,8 +1,7 @@
-#ifndef OPTIMIZED_BUBBLE_SORT_H
-#define OPTIMIZED_BUBBLE_SORT_H
+#pragma once
 
-template <typename T>
-void optimizedBubbleSort(T arr[], int n);
+#include <vector>
+#include <utility>
 
-
-#endif // OPTIMIZED_BUBBLE_SORT_H
+template<typename T>
+void optimizedBubbleSort(std::vector<T>& arr);

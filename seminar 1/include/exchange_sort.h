@@ -1,8 +1,7 @@
-#ifndef EXCHANGE_SORT_H
-#define EXCHANGE_SORT_H
+#pragma once
 
-template <typename T>
-void exchangeSort(T arr[], int n);
+#include <vector>
+#include <utility>
 
-
-#endif // EXCHANGE_SORT_H
+template<typename T>
+void exchangeSort(std::vector<T>& arr);

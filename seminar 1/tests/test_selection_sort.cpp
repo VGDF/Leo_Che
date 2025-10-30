@@ -1,56 +1,54 @@
-#define CATCH_CONFIG_MAIN
-#include "../Catch2-devel/single_include/catch2/catch.hpp"
-#include "../include/selection_sort.h"
+#include "catch.hpp"
+#include "selection_sort.h"
+#include <vector>
 
-TEST(SelectionSortTest, EmptyArray) {
-    int arr[1] = {};
-    int n = 0;
-    selectionSort(arr, n);
-    EXPECT_EQ(n, 0);
-}
+TEST_CASE("Selection Sort", "[selection]") {
 
-TEST(SelectionSortTest, SingleElementArray) {
-    int arr[1] = {1};
-    int n = 1;
-    selectionSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-}
+    SECTION("General case with integers") {
+        std::vector<int> arr = {64, 25, 12, 22, 11};
+        std::vector<int> sorted_arr = {11, 12, 22, 25, 64};
+        selectionSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
 
-TEST(SelectionSortTest, AlreadySortedArray) {
-    int arr[5] = {1, 2, 3, 4, 5};
-    int n = 5;
-    selectionSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-    EXPECT_EQ(arr[1], 2);
-    EXPECT_EQ(arr[2], 3);
-    EXPECT_EQ(arr[3], 4);
-    EXPECT_EQ(arr[4], 5);
-}
+    SECTION("Empty array") {
+        std::vector<int> arr = {};
+        selectionSort(arr);
+        REQUIRE(arr.empty());
+    }
 
-TEST(SelectionSortTest, ReverseSortedArray) {
-    int arr[5] = {5, 4, 3, 2, 1};
-    int n = 5;
-    selectionSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-    EXPECT_EQ(arr[1], 2);
-    EXPECT_EQ(arr[2], 3);
-    EXPECT_EQ(arr[3], 4);
-    EXPECT_EQ(arr[4], 5);
-}
+    SECTION("Single element array") {
+        std::vector<int> arr = {42};
+        selectionSort(arr);
+        REQUIRE(arr.size() == 1);
+        REQUIRE(arr[0] == 42);
+    }
 
-TEST(SelectionSortTest, RandomArray) {
-    int arr[11] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
-    int n = 11;
-    selectionSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-    EXPECT_EQ(arr[1], 1);
-    EXPECT_EQ(arr[2], 2);
-    EXPECT_EQ(arr[3], 3);
-    EXPECT_EQ(arr[4], 3);
-    EXPECT_EQ(arr[5], 4);
-    EXPECT_EQ(arr[6], 5);
-    EXPECT_EQ(arr[7], 5);
-    EXPECT_EQ(arr[8], 5);
-    EXPECT_EQ(arr[9], 6);
-    EXPECT_EQ(arr[10], 9);
+    SECTION("Already sorted array") {
+        std::vector<int> arr = {10, 20, 30, 40, 50};
+        std::vector<int> sorted_arr = {10, 20, 30, 40, 50};
+        selectionSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
+
+    SECTION("Reverse sorted array") {
+        std::vector<int> arr = {5, 4, 3, 2, 1};
+        std::vector<int> sorted_arr = {1, 2, 3, 4, 5};
+        selectionSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
+
+    SECTION("Array with duplicate elements") {
+        std::vector<int> arr = {5, 2, 8, 2, 5, 1};
+        std::vector<int> sorted_arr = {1, 2, 2, 5, 5, 8};
+        selectionSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
+    
+    SECTION("Array with floating point numbers") {
+        std::vector<double> arr = {3.3, 1.1, -4.4, 2.2, -4.4};
+        std::vector<double> sorted_arr = {-4.4, -4.4, 1.1, 2.2, 3.3};
+        selectionSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
 }

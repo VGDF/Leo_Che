@@ -1,55 +1,33 @@
-#include <gtest/gtest.h>
-#include "../include/insertion_sort.h"
+#define CATCH_CONFIG_MAIN
+#include "catch.hpp"
+#include "insertion_sort.h"
+#include <vector>
 
-TEST(InsertionSortTest, EmptyArray) {
-    int arr[1] = {};
-    int n = 0;
-    insertionSort(arr, n);
-    EXPECT_EQ(n, 0);
-}
+TEST_CASE("Insertion Sort", "[insertion]") {
+    SECTION("Positive case") {
+        std::vector<int> arr = {5, 2, 4, 6, 1, 3};
+        std::vector<int> sorted_arr = {1, 2, 3, 4, 5, 6};
+        insertionSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
 
-TEST(InsertionSortTest, SingleElementArray) {
-    int arr[1] = {1};
-    int n = 1;
-    insertionSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-}
+    SECTION("Empty array") {
+        std::vector<int> arr = {};
+        insertionSort(arr);
+        REQUIRE(arr.empty());
+    }
 
-TEST(InsertionSortTest, AlreadySortedArray) {
-    int arr[5] = {1, 2, 3, 4, 5};
-    int n = 5;
-    insertionSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-    EXPECT_EQ(arr[1], 2);
-    EXPECT_EQ(arr[2], 3);
-    EXPECT_EQ(arr[3], 4);
-    EXPECT_EQ(arr[4], 5);
-}
+    SECTION("Already sorted array") {
+        std::vector<int> arr = {1, 2, 3, 4, 5, 6};
+        std::vector<int> sorted_arr = {1, 2, 3, 4, 5, 6};
+        insertionSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
 
-TEST(InsertionSortTest, ReverseSortedArray) {
-    int arr[5] = {5, 4, 3, 2, 1};
-    int n = 5;
-    insertionSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-    EXPECT_EQ(arr[1], 2);
-    EXPECT_EQ(arr[2], 3);
-    EXPECT_EQ(arr[3], 4);
-    EXPECT_EQ(arr[4], 5);
-}
-
-TEST(InsertionSortTest, RandomArray) {
-    int arr[11] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
-    int n = 11;
-    insertionSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-    EXPECT_EQ(arr[1], 1);
-    EXPECT_EQ(arr[2], 2);
-    EXPECT_EQ(arr[3], 3);
-    EXPECT_EQ(arr[4], 3);
-    EXPECT_EQ(arr[5], 4);
-    EXPECT_EQ(arr[6], 5);
-    EXPECT_EQ(arr[7], 5);
-    EXPECT_EQ(arr[8], 5);
-    EXPECT_EQ(arr[9], 6);
-    EXPECT_EQ(arr[10], 9);
+    SECTION("Reverse sorted array") {
+        std::vector<double> arr = {6.1, 5.2, 4.3, 3.4, 2.5, 1.6};
+        std::vector<double> sorted_arr = {1.6, 2.5, 3.4, 4.3, 5.2, 6.1};
+        insertionSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
 }

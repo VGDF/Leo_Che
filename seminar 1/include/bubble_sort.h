@@ -1,8 +1,7 @@
-#ifndef BUBBLE_SORT_H
-#define BUBBLE_SORT_H
+#pragma once
 
-template <typename T>
-void bubbleSort(T arr[], int n);
+#include <vector>
+#include <utility>
 
-
-#endif // BUBBLE_SORT_H
+template<typename T>
+void bubbleSort(std::vector<T>& arr);

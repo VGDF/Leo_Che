@@ -1,55 +1,54 @@
-#include <gtest/gtest.h>
-#include "../include/bubble_sort.h"
+#include "catch.hpp"
+#include "bubble_sort.h"
+#include <vector>
 
-TEST(BubbleSortTest, EmptyArray) {
-    int arr[1] = {};
-    int n = 0;
-    bubbleSort(arr, n);
-    EXPECT_EQ(n, 0);
-}
+TEST_CASE("Bubble Sort", "[bubble]") {
 
-TEST(BubbleSortTest, SingleElementArray) {
-    int arr[1] = {1};
-    int n = 1;
-    bubbleSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-}
+    SECTION("General case with integers") {
+        std::vector<int> arr = {5, 1, 4, 2, 8};
+        std::vector<int> sorted_arr = {1, 2, 4, 5, 8};
+        bubbleSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
 
-TEST(BubbleSortTest, AlreadySortedArray) {
-    int arr[5] = {1, 2, 3, 4, 5};
-    int n = 5;
-    bubbleSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-    EXPECT_EQ(arr[1], 2);
-    EXPECT_EQ(arr[2], 3);
-    EXPECT_EQ(arr[3], 4);
-    EXPECT_EQ(arr[4], 5);
-}
+    SECTION("Empty array") {
+        std::vector<int> arr = {};
+        bubbleSort(arr);
+        REQUIRE(arr.empty());
+    }
 
-TEST(BubbleSortTest, ReverseSortedArray) {
-    int arr[5] = {5, 4, 3, 2, 1};
-    int n = 5;
-    bubbleSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-    EXPECT_EQ(arr[1], 2);
-    EXPECT_EQ(arr[2], 3);
-    EXPECT_EQ(arr[3], 4);
-    EXPECT_EQ(arr[4], 5);
-}
+    SECTION("Single element array") {
+        std::vector<int> arr = {100};
+        bubbleSort(arr);
+        REQUIRE(arr.size() == 1);
+        REQUIRE(arr[0] == 100);
+    }
 
-TEST(BubbleSortTest, RandomArray) {
-    int arr[11] = {3, 1, 4, 1, 5, 9, 2, 6, 5, 3, 5};
-    int n = 11;
-    bubbleSort(arr, n);
-    EXPECT_EQ(arr[0], 1);
-    EXPECT_EQ(arr[1], 1);
-    EXPECT_EQ(arr[2], 2);
-    EXPECT_EQ(arr[3], 3);
-    EXPECT_EQ(arr[4], 3);
-    EXPECT_EQ(arr[5], 4);
-    EXPECT_EQ(arr[6], 5);
-    EXPECT_EQ(arr[7], 5);
-    EXPECT_EQ(arr[8], 5);
-    EXPECT_EQ(arr[9], 6);
-    EXPECT_EQ(arr[10], 9);
+    SECTION("Already sorted array") {
+        std::vector<int> arr = {10, 20, 30, 40};
+        std::vector<int> sorted_arr = {10, 20, 30, 40};
+        bubbleSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
+
+    SECTION("Reverse sorted array") {
+        std::vector<int> arr = {5, 4, 3, 2, 1};
+        std::vector<int> sorted_arr = {1, 2, 3, 4, 5};
+        bubbleSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
+
+    SECTION("Array with duplicate elements") {
+        std::vector<int> arr = {7, 3, 7, 1, 3};
+        std::vector<int> sorted_arr = {1, 3, 3, 7, 7};
+        bubbleSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
+
+    SECTION("Array with floating point numbers") {
+        std::vector<double> arr = {0.5, 0.1, 0.4, 0.2, 0.8};
+        std::vector<double> sorted_arr = {0.1, 0.2, 0.4, 0.5, 0.8};
+        bubbleSort(arr);
+        REQUIRE(arr == sorted_arr);
+    }
 }
